@@ -44,40 +44,35 @@ namespace Gestion_Gastos.Controllers
             return View(categoria);
         }
 
-        // GET: Categoria/Create
-        public IActionResult Create()
+        // GET: Categoria/AddOrEdit
+        public IActionResult AddOrEdit(int id = 0)
         {
-            return View(new Categoria());
+            if (id == 0)
+            {
+                return View(new Categoria());
+            }
+            else
+                return View(_context.Categorias.Find(id));
         }
 
-        // POST: Categoria/Create
+        // POST: Categoria/AddOrEdit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCategoria,Titulo,Icono,Tipo")] Categoria categoria)
+        public async Task<IActionResult> AddOrEdit([Bind("IdCategoria,Titulo,Icono,Tipo")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categoria);
+                if (categoria.IdCategoria == 0)
+                {
+                    _context.Add(categoria);
+                }
+                else
+                    _context.Update(categoria);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(categoria);
-        }
-
-        // GET: Categoria/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Categorias == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria == null)
-            {
-                return NotFound();
             }
             return View(categoria);
         }
