@@ -1,0 +1,76 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@{
+    List<Object> itemsMenu = new List<Object>();
+
+    itemsMenu.Add(new
+    {
+        text = "General",
+        separator = true,
+    });
+    itemsMenu.Add(new
+    {
+        text = "Dashboard",
+        url = "/",
+        iconCss = "fa-solid fa-box",
+    });
+    itemsMenu.Add(new
+    {
+        text = "Categorías",
+        url = "/Categoria",
+        iconCss = "fa-solid fa-folder-closed",
+    });
+    itemsMenu.Add(new
+    {
+        text = "Transacciones",
+        iconCss = "fa-solid fa-arrow-right-arrow-left",
+        url = "/Transaccion"
+    });
+
+    itemsMenu.Add(new
+    {
+        text = "Extras",
+        separator = true,
+    });
+    itemsMenu.Add(new
+    {
+        text = "Reports",
+        iconCss = "fa-solid fa-chart-simple",
+        url = "#"
+    }); 
+    itemsMenu.Add(new
+    {
+        text = "Configuración",
+        iconCss = "fa-solid fa-gear",
+        url = "#"
+    });
+}
+
+
+<ejs-sidebar id="sidebar" width="290px" enableGestures="false">
+    <e-content-template>
+
+        <div class="profile-sidebar mt-3">
+            <img class="profile-pic" src="/images/perfil.jpg" />
+            <div class="titles d-flex flex-column ps-3">
+                <h6 class="mb-0">Adriana Lee</h6>
+                <span class="text-muted">ALCESdev</span>
+            </div>
+        </div>
+
+        <ejs-menu id="menu" items="itemsMenu" orientation="Vertical" hamburgerMode></ejs-menu>
+
+        <div class="logo-wrapper h-100 d-flex justify-content-center align-items-center">
+            <div class="alces-logo">
+                <h1 class="display-6 fw-bold">ALCESdev</h1>
+            </div>
+        </div>
+
+    </e-content-template>
+</ejs-sidebar>
+

@@ -10,13 +10,23 @@ namespace Gestion_Gastos.Models
         public int IdCategoria { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
-        public String? Titulo { get; set; }
+        [Required(ErrorMessage = "Se requiere un título.")]
+        public string Titulo { get; set; }
 
+        [Required(ErrorMessage = "Se requiere un icono para la categoría.")]
         [Column(TypeName = "nvarchar(5)")]
-        public String? Icono { get; set; } = "";
+        public string Icono { get; set; } = "";
 
         [Column(TypeName = "nvarchar(10)")]
-        public String? Tipo { get; set; } = "Gasto";
+        public string Tipo { get; set; } = "Gasto";
 
+        [NotMapped]
+        public string? IconoTitulo
+        {
+            get
+            {
+                return this.Icono + " " + this.Titulo;
+            }
+        }
     }
 }

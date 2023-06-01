@@ -31,12 +31,15 @@ namespace Gestion_Gastos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategoria"), 1L, 1);
 
                     b.Property<string>("Icono")
+                        .IsRequired()
                         .HasColumnType("nvarchar(5)");
 
                     b.Property<string>("Tipo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Titulo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("IdCategoria");
@@ -55,21 +58,18 @@ namespace Gestion_Gastos.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoriaIdCategoria")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("IdCategoria")
                         .HasColumnType("int");
 
-                    b.Property<string>("Nota")
+                    b.Property<string>("Notas")
                         .HasColumnType("nvarchar(75)");
 
                     b.HasKey("IdTransaccion");
 
-                    b.HasIndex("CategoriaIdCategoria");
+                    b.HasIndex("IdCategoria");
 
                     b.ToTable("Transacciones");
                 });
@@ -78,7 +78,9 @@ namespace Gestion_Gastos.Migrations
                 {
                     b.HasOne("Gestion_Gastos.Models.Categoria", "Categoria")
                         .WithMany()
-                        .HasForeignKey("CategoriaIdCategoria");
+                        .HasForeignKey("IdCategoria")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Categoria");
                 });

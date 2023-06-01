@@ -26,26 +26,8 @@ namespace Gestion_Gastos.Controllers
                           Problem("Entity set 'AplicacionDbContext.Categorias'  is null.");
         }
 
-        // GET: Categoria/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Categorias == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (categoria == null)
-            {
-                return NotFound();
-            }
-
-            return View(categoria);
-        }
-
-        // GET: Categoria/AddOrEdit
-        public IActionResult AddOrEdit(int id = 0)
+        // GET: Categoria/CrearEditar
+        public IActionResult CrearEditar(int id = 0)
         {
             if (id == 0)
             {
@@ -55,12 +37,12 @@ namespace Gestion_Gastos.Controllers
                 return View(_context.Categorias.Find(id));
         }
 
-        // POST: Categoria/AddOrEdit
+        // POST: Categoria/CrearEditar
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit([Bind("IdCategoria,Titulo,Icono,Tipo")] Categoria categoria)
+        public async Task<IActionResult> CrearEditar([Bind("IdCategoria,Titulo,Icono,Tipo")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
@@ -72,59 +54,8 @@ namespace Gestion_Gastos.Controllers
                     _context.Update(categoria);
 
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
-            }
-            return View(categoria);
-        }
-
-        // POST: Categoria/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,Titulo,Icono,Tipo")] Categoria categoria)
-        {
-            if (id != categoria.IdCategoria)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(categoria);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoriaExists(categoria.IdCategoria))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(categoria);
-        }
-
-        // GET: Categoria/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Categorias == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.IdCategoria == id);
-            if (categoria == null)
-            {
-                return NotFound();
             }
 
             return View(categoria);

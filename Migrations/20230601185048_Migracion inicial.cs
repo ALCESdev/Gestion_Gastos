@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gestion_Gastos.Migrations
 {
-    public partial class CreacionInicial : Migration
+    public partial class Migracioninicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,9 +15,9 @@ namespace Gestion_Gastos.Migrations
                 {
                     IdCategoria = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Titulo = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    Icono = table.Column<string>(type: "nvarchar(5)", nullable: true),
-                    Tipo = table.Column<string>(type: "nvarchar(10)", nullable: true)
+                    Titulo = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Icono = table.Column<string>(type: "nvarchar(5)", nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,25 +31,25 @@ namespace Gestion_Gastos.Migrations
                     IdTransaccion = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdCategoria = table.Column<int>(type: "int", nullable: false),
-                    CategoriaIdCategoria = table.Column<int>(type: "int", nullable: true),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    Nota = table.Column<string>(type: "nvarchar(75)", nullable: true),
+                    Notas = table.Column<string>(type: "nvarchar(75)", nullable: true),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transacciones", x => x.IdTransaccion);
                     table.ForeignKey(
-                        name: "FK_Transacciones_Categorias_CategoriaIdCategoria",
-                        column: x => x.CategoriaIdCategoria,
+                        name: "FK_Transacciones_Categorias_IdCategoria",
+                        column: x => x.IdCategoria,
                         principalTable: "Categorias",
-                        principalColumn: "IdCategoria");
+                        principalColumn: "IdCategoria",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transacciones_CategoriaIdCategoria",
+                name: "IX_Transacciones_IdCategoria",
                 table: "Transacciones",
-                column: "CategoriaIdCategoria");
+                column: "IdCategoria");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

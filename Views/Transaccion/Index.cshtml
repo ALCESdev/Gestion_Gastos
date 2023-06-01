@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Gestion_Gastos.Models.Transaccion>
+
+@{
+    ViewData["PageTitle"] = "Transacciones";
+    ViewData["PageActionText"] = "+ Nueva transacción";
+    ViewData["PageActionUrl"] = "/Transaccion/CrearEditar";
+}
+
+<div class="row">
+
+    <div class="col-md-7">
+        <ejs-grid id="transacciones" dataSource="@Model" gridLines="None" allowSorting="true" allowPaging="true">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="Categoria" field="IconoConCategoria" ></e-grid-column>
+                <e-grid-column headerText="Fecha" field="Fecha" width="110px" type="date" format="dd-MMM-yyyy" textAlign="Left"></e-grid-column>
+                <e-grid-column headerText="Cantidad" field="FormatoCantidad" textAlign="Right" width="110px"></e-grid-column>
+                <e-grid-column headerText="Actions" template="#actionColumnTemplate" width="100px"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+
+    <div class="col-md-5">
+        <div class="widget h-100 d-flex justify-content-center align-items-center">
+            <i class="fa-solid fa-money-bill-transfer fa-7x"></i>
+        </div>
+    </div>
+
+</div>
+
+
+<script id="actionColumnTemplate" type="text/x-template">
+
+    <div class="d-flex flex-row justify-content-start">
+        <a class="btn btn-sm no-a-decoration" href="/Transaccion/CrearEditar/${IdTransaccion}">
+            <i class="fa-solid fa-pen fa-lg"></i>
+        </a>
+        <form action="/Transaccion/Delete/${IdTransaccion}" method="post">
+        @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-sm btn-link no-a-decoration"
+            onclick="return confirm(&quot;¿Estás seguro de querer borrar este registro?&quot;)">
+                <i class="fa-solid fa-trash-can fa-lg text-danger"></i>
+            </button>
+        </form>
+    </div>
+
+</script>
