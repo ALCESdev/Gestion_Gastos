@@ -52,7 +52,7 @@
             <div class="titulo p-4">
                 <h5 class="fw-bold">Gasto por categoría</h5>
             </div>
-            <ejs-accumulationchart id="graficodonut" enableSmartLabels background="#1a222b">
+            <ejs-accumulationchart id="graficodonut" enableSmartLabels background="#D9D4E8">
                 <e-accumulation-series-collection>
                     <e-accumulation-series dataSource="@ViewBag.DatosGraficoDonut" xName="categoriaTituloIcono" yName="cantidad"
                                            innerRadius="50%" legendShape="Circle" palettes=@(new string[]{"#0B5345 ","#F1948A","#C39BD3","#7FB3D5","#76D7C4","#7DCEA0","#F7DC6F","#E59866","#CCD1D1","#922B21"})>
@@ -60,7 +60,7 @@
                     </e-accumulation-series>
                 </e-accumulation-series-collection>
                 <e-accumulationchart-legendsettings position="Top" toggleVisibility="true">
-                    <e-legendsettings-textstyle color="#fff" size="1rem"></e-legendsettings-textstyle>
+                    <e-legendsettings-textstyle color="#0c0519" size="1rem"></e-legendsettings-textstyle>
                 </e-accumulationchart-legendsettings>
                 <e-accumulationchart-tooltipsettings enable></e-accumulationchart-tooltipsettings>
             </ejs-accumulationchart>
@@ -72,7 +72,7 @@
             <div class="titulo p-4">
                 <h5 class="fw-bold">Ingresos vs Gastos</h5>
             </div>
-            <ejs-chart id="spline-chart" background="#1a222b" palettes=@(new string[]{"#A3E4D7","#FAD7A0"})>
+            <ejs-chart id="spline-chart" background="#D9D4E8" palettes=@(new string[]{"#65da41","#ff4e48"})>
                 <e-chart-primaryxaxis valueType="Category">
                     <e-majorgridlines width="0"></e-majorgridlines>
                     <e-majorticklines width="0"></e-majorticklines>
@@ -92,7 +92,7 @@
                     type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline"></e-series>
                 </e-series-collection>
                 <e-chart-legendsettings position="Top" alignment="Far" toggleVisibility="true">
-                    <e-legendsettings-textstyle color="#fff" size="1rem"></e-legendsettings-textstyle>
+                    <e-legendsettings-textstyle color="#0c0519" size="1rem"></e-legendsettings-textstyle>
                 </e-chart-legendsettings>
                 <e-chart-tooltipsettings enable shared></e-chart-tooltipsettings>
             </ejs-chart>
